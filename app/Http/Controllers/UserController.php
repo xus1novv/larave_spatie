@@ -16,8 +16,8 @@ class UserController extends Controller
     public function __construct()
     {
         // Middleware'larni aniqlash
-        $this->middleware('permission:view roles')->only('index');
-        $this->middleware('permission:edit roles')->only('edit');
+        $this->middleware('permission:view users')->only('index');
+        $this->middleware('permission:edit users')->only('edit');
 
     }
     /**
