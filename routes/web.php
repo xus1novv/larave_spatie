@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\TaskForStaffController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -67,12 +68,22 @@ Route::middleware('auth')->group(function () {
 
     //Task route
     Route::get('/tasks/list', [TaskController::class, 'index'])->name('tasks.index');
+    Route::get('tasks/list/done', [TaskController::class, 'getTasksISDone'])->name('tasks.done');
+    Route::patch('tasks/{id}/done', [TaskController::class, 'done']) -> name('task.done');
+    Route::get('/tasks/{id}/cancel', [TaskController::class, 'cancel'])->name('task.cancel');
+    Route::get('/tasks/{id}/view', [TaskController::class, 'viewTask'])->name('tasks.view');
     Route::get('/tasks/create', [TaskController::class, 'create'])->name('tasks.create');
     Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
     Route::get('/tasks/{id}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
     Route::post('/tasks/{id}', [TaskController::class, 'update'])->name('tasks.update');
     Route::delete('/tasks/{id}', [TaskController::class, 'destroy'])->name('tasks.destroy');
 
+
+    //Task route for staff user
+    Route::get('/tasks/staff/list', [TaskForStaffController::class, 'list_task'])->name('staff.list');
+    Route::get('/task/{id}/done',[TaskForStaffController::class, 'task_done'])->name('staff.done');
+    Route::get('/tasks/{id}/staff-view', [TaskForStaffController::class, 'staffView'])->name('staff.view');
+    Route::post('/tasks/{id}/upload-file', [TaskForStaffController::class, 'uploadFile'])->name('staff.upload-file');
 
 
 

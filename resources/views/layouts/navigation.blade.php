@@ -55,7 +55,24 @@
                         {{ __('Tasks') }}
                     </x-nav-link>
                 </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('tasks.done')" :active="request()->routeIs('tasks.done')">
+                        {{ __('Done Tasks') }}
+                    </x-nav-link>
+                </div>
+
+
                 @endcan
+
+                @role('staff')            
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('staff.list')" :active="request()->routeIs('staff.list')">
+                        {{ __('MyTasks') }}
+                    </x-nav-link>
+                </div>
+                @endrole
+                
             </div>
 
             <!-- Settings Dropdown -->

@@ -27,17 +27,49 @@ class TaskController extends Controller
     public function index()
     {
 
-        if (auth()->user()->roles -> contains('name', 'staff')) {
-            $tasks = Task::where('user_id', auth()->id())->paginate(10);
-            return view('tasks.list', compact('tasks'));
-        }
-
         $tasks = Task::where('status','pending')->get();
 
         return view('tasks.list', [
             'tasks'=>$tasks
         ]);
     }
+
+    public function getTasksIsDone()
+    {
+        $tasks = Task::where('status','!=','pending')->orderBy('created_at', 'desc')->get();
+        return view('tasks.done_list', [
+            'tasks'=>$tasks
+        ]);
+
+    }
+
+    public function done($id){
+        $task = Task::find($id);
+        $task->status = 'done';
+        $task->save();
+        return redirect()->route('tasks.done');
+
+    }
+
+    public function cancel($id)
+    {
+        $task = Task::find($id);
+        $task->status = 'pending';
+        $task->save();
+        return redirect()->route('tasks.index');
+    }
+
+
+    public function viewTask($id)
+    {
+        $task = Task::find($id);
+        return view('tasks.view_task',
+        [
+            'task'=>$task
+        ]
+        );
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -102,46 +134,39 @@ class TaskController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-        //
         $task = Task::findOrFail($id);
-
-        $validator = Validator::make($request->all(),[
+    
+        $validator = Validator::make($request->all(), [
             'title' => 'required|max:255',
             'description' => 'required',
             'deadline' => 'required|date',
-            'user_id' => 'required|exists:users,id', 
+            'user_id' => 'required|exists:users,id',
             'file' => 'nullable|file|mimes:jpeg,png,jpg,pdf,doc,docx,xls,xlsx|max:2048',
         ]);
-
+    
+        if ($validator->fails()) {
+            return redirect()->route('tasks.edit', $id)->withInput()->withErrors($validator);
+        }
+    
         if ($request->hasFile('file')) {
             $file = $request->file('file');
             $filePath = $file->store('tasks', 'public');
-            $task->file_path = $filePath; // Fayl yo'lini taskga saqlash
-        }
-
-        if ($validator -> passes()){
-            $task->title = $request->title;
-            $task->description = $request->description;
-            $task->deadline = $request->deadline;
-            $task->user_id = $request->user_id;
             $task->file_path = $filePath; // Fayl yo'lini saqlash
-            $task->status = 'pending'; // Boshlang'ich status
-            $task->save();
-            return redirect()->route('tasks.index')->with('success','Task update successfully');
-
-        } else {
-            return redirect() -> route('tasks.edit',$id)->withInput()->withErrors($validator);
         }
+    
+        $task->title = $request->title;
+        $task->description = $request->description;
+        $task->deadline = $request->deadline;
+        $task->user_id = $request->user_id;
+        $task->status = 'pending'; // Boshlang'ich status
+        $task->save();
+    
+        return redirect()->route('tasks.index')->with('success', 'Task updated successfully');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
+    
+ 
     public function destroy(string $id)
     {
         $task = Task::find($id);
