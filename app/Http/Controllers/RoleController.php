@@ -12,14 +12,13 @@ use Illuminate\Routing\Controllers\Middleware;
 class RoleController extends Controller
 {
 
-    public function __construct()
-    {
-        // Middleware'larni aniqlash
-        $this->middleware('permission:view roles')->only('index');
-        $this->middleware('permission:edit roles')->only('edit');
-        $this->middleware('permission:create roles')->only('create');
-        $this->middleware('permission:delete roles')->only('destroy');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('permission:view roles')->only('index');
+    //     $this->middleware('permission:edit roles')->only('edit');
+    //     $this->middleware('permission:create roles')->only('create');
+    //     $this->middleware('permission:delete roles')->only('destroy');
+    // }
 
 
     public function index(){

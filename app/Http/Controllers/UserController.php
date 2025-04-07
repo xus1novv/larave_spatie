@@ -13,16 +13,14 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
 
-    public function __construct()
-    {
-        // Middleware'larni aniqlash
-        $this->middleware('permission:view users')->only('index');
-        $this->middleware('permission:edit users')->only('edit');
+    // public function __construct()
+    // {
+    //     // Middleware'larni aniqlash
+    //     $this->middleware('permission:view users')->only('index');
+    //     $this->middleware('permission:edit users')->only('edit');
 
-    }
-    /**
-     * Display a listing of the resource.
-     */
+    // }
+
     public function index()
     {
         //
@@ -33,9 +31,7 @@ class UserController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+   
     public function create()
     {
         $roles = Role::orderBy('name','ASC')->get();
@@ -45,9 +41,7 @@ class UserController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+ 
     public function store(Request $request)
     {
         
@@ -76,21 +70,15 @@ class UserController extends Controller
         return redirect() -> route('users.index') -> with('success', 'User create successfully!');
     }
 
-    /**
-     * Display the specified resource.
-     */
+  
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(string $id)
     {
-        //
-
         $user = User::findOrFail($id);
         $roles = Role::orderBy('name','ASC')->get();
 
@@ -105,9 +93,7 @@ class UserController extends Controller
 
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, string $id)
     {
         
@@ -133,9 +119,7 @@ class UserController extends Controller
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(string $id)
     {
         $user = User::find($id);

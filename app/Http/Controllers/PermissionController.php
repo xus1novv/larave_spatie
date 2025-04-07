@@ -14,14 +14,14 @@ class PermissionController extends Controller
 {
 
 
-    public function __construct()
-    {
-        // Middleware'larni aniqlash
-        $this->middleware('permission:view permissions')->only('index');
-        $this->middleware('permission:edit permissions')->only('edit');
-        $this->middleware('permission:create permissions')->only('create');
-        $this->middleware('permission:delete permissions')->only('destroy');
-    }
+    // public function __construct()
+    // {
+    //     // Middleware'larni aniqlash
+    //     $this->middleware('permission:view permissions')->only('index');
+    //     $this->middleware('permission:edit permissions')->only('edit');
+    //     $this->middleware('permission:create permissions')->only('create');
+    //     $this->middleware('permission:delete permissions')->only('destroy');
+    // }
 
 
     // Bu metod permission pageni ko'rsatadi

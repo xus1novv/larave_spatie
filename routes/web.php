@@ -1,12 +1,19 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\SettingController;
+use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TaskForStaffController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WorkController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,9 +31,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [StatisticsController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -49,15 +54,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/roles/{id}', [RoleController::class, 'update'])->name('roles.update');
     Route::delete('/roles/{id}', [RoleController::class, 'destroy']) -> name('roles.destroy');
 
-
-    // Article route
-    Route::get('/articles/list', [ArticleController::class, 'index'])->name('articles.index');
-    Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');
-    Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
-    Route::get('/articles/{id}/edit', [ArticleController::class, 'edit'])->name('articles.edit');
-    Route::post('/articles/{id}', [ArticleController::class, 'update'])->name('articles.update');
-    Route::delete('/articles/{id}', [ArticleController::class, 'destroy']) -> name('articles.destroy');
-
     //User roles
     Route::get('/users/list', [UserController::class, 'index'])->name('users.index');
     Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
@@ -66,33 +62,59 @@ Route::middleware('auth')->group(function () {
     Route::post('/users/{id}', [UserController::class, 'update'])->name('users.update');
     Route::delete('/users/{id}', [UserController::class, 'destroy']) -> name('users.destroy');
 
-    //Task route
-    Route::get('/tasks/list', [TaskController::class, 'index'])->name('tasks.index');
-    Route::get('tasks/list/done', [TaskController::class, 'getTasksISDone'])->name('tasks.done');
-    Route::patch('tasks/{id}/done', [TaskController::class, 'done']) -> name('task.done');
-    Route::get('/tasks/{id}/cancel', [TaskController::class, 'cancel'])->name('task.cancel');
-    Route::get('/tasks/{id}/view', [TaskController::class, 'viewTask'])->name('tasks.view');
-    Route::get('/tasks/create', [TaskController::class, 'create'])->name('tasks.create');
-    Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
-    Route::get('/tasks/{id}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
-    Route::post('/tasks/{id}', [TaskController::class, 'update'])->name('tasks.update');
-    Route::delete('/tasks/{id}', [TaskController::class, 'destroy'])->name('tasks.destroy');
+    //Settings
+    Route::resource('settings', SettingController::class)->names([
+        'index'   => 'settings.index',
+        'create'  => 'settings.create',
+        'store'   => 'settings.store',
+        'edit'    => 'settings.edit',
+        'update'  => 'settings.update',
+        'destroy' => 'settings.destroy',
+    ]);;
+
+    Route::prefix('admin')->group(function () {
+        Route::get('/about', [AboutController::class, 'index'])->name('admin.about.index');
+        Route::get('/about/create', [AboutController::class, 'create'])->name('admin.about.create');
+        Route::post('/about', [AboutController::class, 'store'])->name('admin.about.store');
+        Route::get('/about/{id}/edit', [AboutController::class, 'edit'])->name('admin.about.edit');
+        Route::put('/about/{id}', [AboutController::class, 'update'])->name('admin.about.update');
+        Route::delete('/about/{id}', [AboutController::class, 'destroy'])->name('admin.about.destroy');
+        Route::post('/team/store', [AboutController::class, 'storeTeam'])->name('team.store');
+    });
+
+    Route::prefix('admin')->group(function () {
+        Route::get('/works', [WorkController::class, 'index'])->name('admin.work.index');
+        Route::get('/works/create', [WorkController::class, 'create'])->name('admin.work.create');
+        Route::post('/works', [WorkController::class, 'store'])->name('admin.work.store');
+        Route::get('/works/{id}/edit', [WorkController::class, 'edit'])->name('admin.work.edit');
+        Route::put('/works/{id}', [WorkController::class, 'update'])->name('admin.work.update');
+        Route::delete('/works/{id}', [WorkController::class, 'destroy'])->name('admin.work.destroy');
+    });
+
+    // //HomePage
+    Route::get('/',[HomeController::class, 'index'])->name('base');
+    Route::get('/home',[HomeController::class, 'home'])->name('home');
+    Route::get('/about',[HomeController::class, 'about'])->name('about');
+    Route::get('/contact',[HomeController::class, 'contact'])->name('contact');
+    Route::get('/location',[HomeController::class, 'location'])->name('location');
+    Route::get('/price',[HomeController::class, 'price'])->name('price');
+    Route::get('/service',[HomeController::class, 'services'])->name('services');
+    Route::get('/service/{service}', [HomeController::class, 'show'])->name('service.show');
 
 
-    //Task route for staff user
-    Route::get('/tasks/staff/list', [TaskForStaffController::class, 'list_task'])->name('staff.list');
-    Route::get('/task/{id}/done',[TaskForStaffController::class, 'task_done'])->name('staff.done');
-    Route::get('/tasks/{id}/staff-view', [TaskForStaffController::class, 'staffView'])->name('staff.view');
-    Route::post('/tasks/{id}/upload-file', [TaskForStaffController::class, 'uploadFile'])->name('staff.upload-file');
+    Route::get('/services', [BookingController::class, 'index'])->name('services');
+    Route::post('/bookings/store', [BookingController::class, 'store'])->name('bookings.store');
+    Route::get('/bookings/times', [BookingController::class, 'getAvailableTimes']);
 
 
-
- 
-
-
-
-
-
+    Route::resource('services', ServiceController::class)->names([
+        'index'   => 'service.index',
+        'create'  => 'service.create',
+        'store'   => 'service.store',
+        'edit'    => 'service.edit',
+        'update'  => 'service.update',
+        'destroy' => 'service.destroy',
+    ]);;
 
 
 });

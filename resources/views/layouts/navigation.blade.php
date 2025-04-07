@@ -17,62 +17,49 @@
                     </x-nav-link>
                 </div>
 
-                @can('view permissions')  
+  
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('permissions.index')" :active="request()->routeIs('permissions.index')">
                         {{ __('Permissions') }}
                     </x-nav-link>
                 </div>
-                @endcan
-
-                @can('view roles')
+       
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('roles.index')" :active="request()->routeIs('roles.index')">
                         {{ __('Roles') }}
                     </x-nav-link>
                 </div>
-                @endcan
 
-                @can('view articles')                   
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('articles.index')" :active="request()->routeIs('articles.index')">
-                        {{ __('Articles') }}
-                    </x-nav-link>
-                </div>
-                @endcan
-
-                @can('view users')              
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
                         {{ __('Users') }}
                     </x-nav-link>
                 </div>
-                @endcan
-
-                @can('view tasks')              
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('tasks.index')" :active="request()->routeIs('tasks.index')">
-                        {{ __('Tasks') }}
-                    </x-nav-link>
-                </div>
-
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('tasks.done')" :active="request()->routeIs('tasks.done')">
-                        {{ __('Done Tasks') }}
-                    </x-nav-link>
-                </div>
-
-
-                @endcan
-
-                @role('staff')            
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('staff.list')" :active="request()->routeIs('staff.list')">
-                        {{ __('MyTasks') }}
-                    </x-nav-link>
-                </div>
-                @endrole
                 
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('settings.index')" :active="request()->routeIs('settings.index')">
+                        {{ __('Settings') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('service.index')" :active="request()->routeIs('service.index')">
+                        {{ __('Services') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('admin.about.index')" :active="request()->routeIs('admin.about.index')">
+                        {{ __('About') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('admin.work.index')" :active="request()->routeIs('admin.work.index')">
+                        {{ __('Our Works') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
