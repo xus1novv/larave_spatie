@@ -1277,3 +1277,100 @@ a:focus {
 .footer .copyright p a:hover {
     color: #ffffff;
 }
+
+.custom-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.custom-dropdown-button {
+    background-color: #fff;
+    color: #333;
+    font-size: 14px;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.custom-dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    margin-top: 8px;
+    background-color: #fff;
+    min-width: 160px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+}
+
+.custom-dropdown-content a,
+.custom-dropdown-content button {
+    display: block;
+    padding: 8px 12px;
+    color: #333;
+    text-decoration: none;
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    font-size: 14px;
+}
+
+.custom-dropdown-content a:hover,
+.custom-dropdown-content button:hover {
+    background-color: #f0f0f0;
+}
+
+.profile-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.profile-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.profile-balance {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: green;
+}
+
+.profile-booking-list {
+    margin-top: 2rem;
+}
+
+.profile-booking-item {
+    padding: 1rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.profile-booking-item p {
+    margin: 0.5rem 0;
+}
+
+body {
+    background-color: #f8f9fa;
+}
+.profile-header {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+.order-card {
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 15px;
+    background-color: #fff;
+}
+.order-card:hover {
+    background-color: #f1f1f1;
+}
+
+

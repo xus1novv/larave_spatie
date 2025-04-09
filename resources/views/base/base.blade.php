@@ -16,6 +16,7 @@
         <link href="{{asset('lib/animate/animate.min.css')}}" rel="stylesheet">
         <link href="{{asset('lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
 
+
         <!-- Template Stylesheet -->
         <link href="{{asset('css/style.css')}}" rel="stylesheet">
     </head>
@@ -93,9 +94,22 @@
                             <a href="{{ route('location') }}" class="nav-item nav-link {{ Route::is('location') ? 'active' : '' }}">Manzillarimiz</a>
                             <a href="{{ route('contact') }}" class="nav-item nav-link {{ Route::is('contact') ? 'active' : '' }}">Biz bilan aloqa</a>
                         </div>
-                        <div class="ms-auto">
-                            <a class="btn btn-custom" href="#">Get Appointment</a>
+
+                        <div class="custom-dropdown hidden sm:inline-block ms-6">
+                            <button onclick="toggleDropdown()" class="custom-dropdown-button">
+                                {{ Auth::user()->name }}
+                            </button>
+                            <div id="dropdownContent" class="custom-dropdown-content">
+                                <a href="{{ route('user_profile.index') }}">Balans</a>
+                                <a href="{{ route('user_profile.edit') }}">Yangilash</a>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit">Chiqish</button>
+                                </form>
+                            </div>
                         </div>
+             
+                        
                     </div>
                 </nav>
             </div>
@@ -173,6 +187,8 @@
             <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+            <script src="//unpkg.com/alpinejs" defer></script>
+
             
             <script src="{{asset('lib/easing/easing.min.js')}}"></script>
             <script src="{{asset('lib/owlcarousel/owl.carousel.min.js')}}"></script>
@@ -181,6 +197,22 @@
     
             <!-- Template Javascript -->
             <script src="{{asset('js/main.js')}}"></script>
+            <script>
+                function toggleDropdown() {
+                    const dropdown = document.getElementById('dropdownContent');
+                    dropdown.style.display = (dropdown.style.display === 'block') ? 'none' : 'block';
+                }
+            
+                // Dropdownni tashqarisiga bosilganda yopish
+                document.addEventListener('click', function(event) {
+                    const dropdown = document.getElementById('dropdownContent');
+                    const button = document.querySelector('.custom-dropdown-button');
+                    if (!button.contains(event.target) && !dropdown.contains(event.target)) {
+                        dropdown.style.display = 'none';
+                    }
+                });
+            </script>
+            
 
             @stack('scripts')
         </body>

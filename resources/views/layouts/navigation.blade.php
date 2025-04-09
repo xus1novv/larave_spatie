@@ -60,6 +60,12 @@
                         {{ __('Our Works') }}
                     </x-nav-link>
                 </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('admin.clients.actions')" :active="request()->routeIs('admin.clients.actions')">
+                        {{ __('User balance') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->

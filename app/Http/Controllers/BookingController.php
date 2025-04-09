@@ -51,6 +51,7 @@ class BookingController extends Controller
         }
 
         Booking::create([
+            'user_id'=>auth()->id(),
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'phone_number' => $request->phone_number,
@@ -95,5 +96,34 @@ class BookingController extends Controller
         }
     }
     
+    public function storeMultiple(Request $request)
+    {
+    $request->validate([
+        'service_ids' => 'required|array',
+        'service_ids.*' => 'exists:services,id',
+        'first_name' => 'required|string|max:255',
+        'last_name' => 'required|string|max:255',
+        'phone_number' => 'required|string|max:20',
+        'car_number' => 'required|string|max:20',
+        'car_model' => 'required|string|max:255',
+        'booking_date' => 'required|date',
+        'booking_time' => 'required|string',
+    ]);
+
+    foreach ($request->service_ids as $serviceId) {
+        Booking::create([
+            'user_id'=>auth()->id(),
+            'service_id' => $serviceId,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'phone_number' => $request->phone_number,
+            'car_number' => $request->car_number,
+            'car_model' => $request->car_model,
+            'booking_time' => $request->booking_date . ' ' . $request->booking_time,
+        ]);
+    }
+
+    return redirect()->back()->with('success', 'Buyurtma muvaffaqiyatli yuborildi!');
+    }
 
 }

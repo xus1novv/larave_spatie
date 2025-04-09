@@ -9,6 +9,7 @@ class Booking extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'first_name',
         'last_name',
         'phone_number',
@@ -22,4 +23,12 @@ class Booking extends Model
     {
         return $this->belongsTo(Service::class);
     }
+
+    public function user()
+    {
+    return $this->belongsTo(User::class);
+    }
+
+
+
 }

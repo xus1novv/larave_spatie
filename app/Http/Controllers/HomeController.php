@@ -6,9 +6,11 @@ use App\Models\About;
 use App\Models\Booking;
 use App\Models\Service;
 use App\Models\Team;
+use App\Models\Wallet;
 use App\Models\Work;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends BaseController
 {
@@ -52,7 +54,10 @@ class HomeController extends BaseController
     }
 
     public function location() {
-        return view('base.washing_points');
+        $services = Service::all();
+        return view('base.washing_points', [
+            "services"=>$services
+        ]);
     }
 
     public function show(Service $service)
@@ -67,5 +72,18 @@ class HomeController extends BaseController
             'service' => $service,
             'bookedTimes'=>$bookedTimes
         ]);
+    }
+
+    public function userProfile()
+    {
+        $user = Auth::user();
+        $bookings = Booking::with('service')
+            ->where('user_id', $user->id)
+            ->latest()
+            ->get();
+
+        $wallet = Wallet::where('user_id', $user->id)->first();
+
+        return view('profile.index', compact('user', 'bookings', 'wallet'));
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SettingController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TaskForStaffController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\WorkController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,6 +39,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profile/user', [UserProfileController::class, 'index'])->name('user_profile.index');
+    Route::get('/profile/user/edit', [UserProfileController::class, 'edit'])->name('user_profile.edit');
+    Route::patch('/profile/user/update', [UserProfileController::class, 'update'])->name('user_profile.update');
+    Route::delete('/profile/user/destroy', [UserProfileController::class, 'destroy'])->name('user_profile.destroy');
+
+    Route::get('/admin/clients/actions', [ClientController::class, 'index'])->name('admin.clients.actions');
+    Route::post('/admin/clients/topup', [ClientController::class, 'topup'])->name('admin.clients.topup');
+    Route::get('/admin/clients/history', [ClientController::class, 'history'])->name('admin.clients.history');
+
+
 
     // Permission route
     Route::get('/permissions/list', [PermissionController::class, 'index'])->name('permissions.index');
@@ -105,6 +117,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/services', [BookingController::class, 'index'])->name('services');
     Route::post('/bookings/store', [BookingController::class, 'store'])->name('bookings.store');
     Route::get('/bookings/times', [BookingController::class, 'getAvailableTimes']);
+    Route::get('/buyurtma/create', [BookingController::class, 'create'])->name('buyurtma.create');
+    Route::post('/buyurtma', [BookingController::class, 'storeMultiple'])->name('buyurtma.store');
+
 
 
     Route::resource('services', ServiceController::class)->names([
