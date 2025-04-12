@@ -9,6 +9,7 @@ use App\Models\Team;
 use App\Models\Wallet;
 use App\Models\Work;
 use Carbon\Carbon;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,7 +31,7 @@ class HomeController extends BaseController
     }
 
     public function about(){
-        $abouts = About::all();
+        $abouts = About::first();
         $ourWorks = Work::all();
         return view('base.about',[
             'about' => $abouts,
@@ -85,5 +86,34 @@ class HomeController extends BaseController
         $wallet = Wallet::where('user_id', $user->id)->first();
 
         return view('profile.index', compact('user', 'bookings', 'wallet'));
+    }
+
+    public function user_balance()
+    {
+        $user = Auth::user();
+
+        $bookings = Booking::with('service')
+            ->where('user_id', $user->id)
+            ->latest()
+            ->get();
+
+        $wallet = Wallet::where('user_id', $user->id)->first();
+        
+
+        if (!$wallet) {
+            $wallet = Wallet::create([
+                'user_id' => $user->id,
+                'balance' => 0
+            ]);
+        }
+
+        return view('base.profile', compact('user', 'bookings', 'wallet'));
+    }
+
+    public function profile_edit(Request $request): View
+    {
+        return view('base.profile_edit', [
+            'user' => $request->user(),
+        ]);
     }
 }

@@ -63,7 +63,7 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="section-header text-left">
-                            <p>About Us</p>
+                            <p>Biz haqimizda</p>
                             <h2>{{$about->title}}</h2>
                         </div>
                         <div class="about-content">
@@ -71,12 +71,12 @@
                                 {{$about->description}}
                             </p>
                             <ul>
-                                <li><i class="far fa-check-circle"></i>Seats washing</li>
-                                <li><i class="far fa-check-circle"></i>Vacuum cleaning</li>
-                                <li><i class="far fa-check-circle"></i>Interior wet cleaning</li>
-                                <li><i class="far fa-check-circle"></i>Window wiping</li>
+                                <li><i class="far fa-check-circle"></i>Tashqi tozalash</li>
+                                <li><i class="far fa-check-circle"></i>Ichki tozalash</li>
+                                <li><i class="far fa-check-circle"></i>O'rindiqlarni yuvish</li>
+                                <li><i class="far fa-check-circle"></i>G'ildiraklarni tozalash</li>
                             </ul>
-                            <a class="btn btn-custom" href="{{route('about')}}">Learn More</a>
+                            <a class="btn btn-custom" href="{{route('about')}}">Kirish</a>
                         </div>
                     </div>
                 </div>
@@ -91,8 +91,8 @@
     <div class="container">
         <!-- Section Header -->
         <div class="text-center mb-5">
-            <p class="text-uppercase text-secondary mb-2">What We Do?</p>
-            <h2 class="display-5 fw-bold text-dark">Premium Washing Services</h2>
+            <p class="text-uppercase text-secondary mb-2">Biz nima qilamiz?</p>
+            <h2 class="display-5 fw-bold text-dark">Premium tozalash servislari</h2>
         </div>
 
         <!-- Services Grid -->
@@ -151,7 +151,7 @@
                             <i class="fa fa-map-marker-alt"></i>
                             <div class="facts-text">
                                 <h3 data-toggle="counter-up">{{$about->service_points}}</h3>
-                                <p>Service Points</p>
+                                <p>Manzillarimiz soni</p>
                             </div>
                         </div>
                     </div>
@@ -160,7 +160,7 @@
                             <i class="fa fa-user"></i>
                             <div class="facts-text">
                                 <h3 data-toggle="counter-up">{{$about->engineers_workers}}</h3>
-                                <p>Engineers & Workers</p>
+                                <p>Muhandis va ishchilar</p>
                             </div>
                         </div>
                     </div>
@@ -169,7 +169,7 @@
                             <i class="fa fa-users"></i>
                             <div class="facts-text">
                                 <h3 data-toggle="counter-up">{{$about->happy_clients}}</h3>
-                                <p>Happy Clients</p>
+                                <p>Hursand mijozlarimiz</p>
                             </div>
                         </div>
                     </div>
@@ -178,7 +178,7 @@
                             <i class="fa fa-check"></i>
                             <div class="facts-text">
                                 <h3 data-toggle="counter-up">{{$about->projects_completed}}</h3>
-                                <p>Projects Completed</p>
+                                <p>Bajarilgan loyihalar</p>
                             </div>
                         </div>
                     </div>
@@ -192,8 +192,8 @@
         <div class="price">
             <div class="container">
                 <div class="section-header text-center">
-                    <p>Washing Plan</p>
-                    <h2>Choose Your Plan</h2>
+                    <p>Tariflarimiz</p>
+                    <h2>Tariflarimizdan birini tanlang</h2>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
@@ -268,69 +268,20 @@
                 <div class="row">
                     <div class="col-lg-7">
                         <div class="section-header text-left">
-                            <p>Washing Points</p>
-                            <h2>Car Washing & Care Points</h2>
+                            <p>Bizning joylashgan joyimiz</p>
+                            <h2>Avtomobil yuvish va parvarishlash punktlari</h2>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="location-item">
                                     <i class="fa fa-map-marker-alt"></i>
                                     <div class="location-text">
-                                        <h3>Car Washing Point</h3>
-                                        <p>123 Street, New York, USA</p>
-                                        <p><strong>Call:</strong>+012 345 6789</p>
+                                        <h3>Bizning joylashgan joyimiz</h3>
+                                        <p>15 uy, Mustaqillik ko'cha, Urganch sh</p>
+                                        <p><strong>Tel:</strong>+998934456568</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="location-item">
-                                    <i class="fa fa-map-marker-alt"></i>
-                                    <div class="location-text">
-                                        <h3>Car Washing Point</h3>
-                                        <p>123 Street, New York, USA</p>
-                                        <p><strong>Call:</strong>+012 345 6789</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="location-item">
-                                    <i class="fa fa-map-marker-alt"></i>
-                                    <div class="location-text">
-                                        <h3>Car Washing Point</h3>
-                                        <p>123 Street, New York, USA</p>
-                                        <p><strong>Call:</strong>+012 345 6789</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="location-item">
-                                    <i class="fa fa-map-marker-alt"></i>
-                                    <div class="location-text">
-                                        <h3>Car Washing Point</h3>
-                                        <p>123 Street, New York, USA</p>
-                                        <p><strong>Call:</strong>+012 345 6789</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-5">
-                        <div class="location-form">
-                            <h3>Request for a car wash</h3>
-                            <form>
-                                <div class="control-group">
-                                    <input type="text" class="form-control" placeholder="Name" required="required" />
-                                </div>
-                                <div class="control-group">
-                                    <input type="email" class="form-control" placeholder="Email" required="required" />
-                                </div>
-                                <div class="control-group">
-                                    <textarea class="form-control" placeholder="Description" required="required"></textarea>
-                                </div>
-                                <div>
-                                    <button class="btn btn-custom" type="submit">Send Request</button>
-                                </div>
-                            </form>
                         </div>
                     </div>
                 </div>
@@ -343,8 +294,8 @@
         <div class="team">
             <div class="container">
                 <div class="section-header text-center">
-                    <p>Meet Our Team</p>
-                    <h2>Our Engineers & Workers</h2>
+                    <p>Bizning jamoa</p>
+                    <h2>Bizning muhandis va ishchilarimiz</h2>
                 </div>
                 <div class="row">
                     <div class="col-lg-3 col-md-6">
@@ -353,8 +304,8 @@
                                 <img src="img/team-1.png" alt="Team Image">
                             </div>
                             <div class="team-text">
-                                <h2>Donald John</h2>
-                                <p>Engineer</p>
+                                <h2>Elomon Jumanazarov</h2>
+                                <p>Muhandis</p>
                                 <div class="team-social">
                                     <a href=""><i class="fab fa-twitter"></i></a>
                                     <a href=""><i class="fab fa-facebook-f"></i></a>
@@ -370,8 +321,8 @@
                                 <img src="img/team-1.png" alt="Team Image">
                             </div>
                             <div class="team-text">
-                                <h2>Adam Phillips</h2>
-                                <p>Engineer</p>
+                                <h2>Odiljonov Maqsadbek</h2>
+                                <p>Muhandis</p>
                                 <div class="team-social">
                                     <a href=""><i class="fab fa-twitter"></i></a>
                                     <a href=""><i class="fab fa-facebook-f"></i></a>
@@ -387,8 +338,8 @@
                                 <img src="img/team-1.png" alt="Team Image">
                             </div>
                             <div class="team-text">
-                                <h2>Thomas Olsen</h2>
-                                <p>Worker</p>
+                                <h2>Xusinov Og'abek</h2>
+                                <p>Ishchi</p>
                                 <div class="team-social">
                                     <a href=""><i class="fab fa-twitter"></i></a>
                                     <a href=""><i class="fab fa-facebook-f"></i></a>
@@ -404,8 +355,8 @@
                                 <img src="img/team-1.png" alt="Team Image">
                             </div>
                             <div class="team-text">
-                                <h2>James Alien</h2>
-                                <p>Worker</p>
+                                <h2>Allanazarov Mirzohid</h2>
+                                <p>Ishchi</p>
                                 <div class="team-social">
                                     <a href=""><i class="fab fa-twitter"></i></a>
                                     <a href=""><i class="fab fa-facebook-f"></i></a>
@@ -425,48 +376,44 @@
         <div class="testimonial">
             <div class="container">
                 <div class="section-header text-center">
-                    <p>Testimonial</p>
-                    <h2>What our clients say</h2>
+                    <p>Fikrlar</p>
+                    <h2>Bizning mijozlarimiz nima deyishadi</h2>
                 </div>
                 <div class="owl-carousel testimonials-carousel">
                     <div class="testimonial-item">
                         <img src="img/testimonial-1.jpg" alt="Image">
                         <div class="testimonial-text">
-                            <h3>Client Name</h3>
-                            <h4>Profession</h4>
+                            <h3>Akbarjon M</h3>
+                            <h4>Doimiy mijozimiz</h4>
                             <p>
-                                Lorem ipsum dolor sit amet elit. Phasel preti mi facilis ornare velit non vulputa. Aliqu metus tortor auctor gravid
-                            </p>
+                                Avtomoyka xizmati juda yaxshi. Mashinamni to'liq yuvib berishdi va ichki qismini ham toza qilishdi. Narxi ham maqbul                            </p>
                         </div>
                     </div>
                     <div class="testimonial-item">
                         <img src="img/testimonial-2.jpg" alt="Image">
                         <div class="testimonial-text">
-                            <h3>Client Name</h3>
-                            <h4>Profession</h4>
+                            <h3>Dilnoza R</h3>
+                            <h4>Doimiy mijozimiz</h4>
                             <p>
-                                Lorem ipsum dolor sit amet elit. Phasel preti mi facilis ornare velit non vulputa. Aliqu metus tortor auctor gravid
-                            </p>
+                                Yangi xizmatni sinab ko'rishga qaror qildim, juda mamnunman. Tashqi va ichki yuvish juda sifatli amalga oshirilgan. Taklif qilaman!                            </p>
                         </div>
                     </div>
                     <div class="testimonial-item">
                         <img src="img/testimonial-3.jpg" alt="Image">
                         <div class="testimonial-text">
-                            <h3>Client Name</h3>
-                            <h4>Profession</h4>
+                            <h3>Jamshid T</h3>
+                            <h4>Doimiy mijozimiz</h4>
                             <p>
-                                Lorem ipsum dolor sit amet elit. Phasel preti mi facilis ornare velit non vulputa. Aliqu metus tortor auctor gravid
-                            </p>
+                                Premium xizmatni tanladim, va natija juda a'lo darajada. Mashinamda hech qanday dog' qolmadi. Yuqori sifat, tavsiya qilaman.                            </p>
                         </div>
                     </div>
                     <div class="testimonial-item">
                         <img src="img/testimonial-4.jpg" alt="Image">
                         <div class="testimonial-text">
-                            <h3>Client Name</h3>
-                            <h4>Profession</h4>
+                            <h3>Olim B</h3>
+                            <h4>Doimiy mijozimiz</h4>
                             <p>
-                                Lorem ipsum dolor sit amet elit. Phasel preti mi facilis ornare velit non vulputa. Aliqu metus tortor auctor gravid
-                            </p>
+                                Avtomoykaning xizmatlari juda mukammal. Mashinamni har safar shu yerda tozalataman. Xizmat hamda narxlar juda maqbul.                            </p>
                         </div>
                     </div>
                 </div>

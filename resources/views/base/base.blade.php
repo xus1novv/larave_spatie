@@ -91,7 +91,6 @@
                             <a href="{{ route('about') }}" class="nav-item nav-link {{ Route::is('about') ? 'active' : '' }}">Biz haqimizda</a>
                             <a href="{{ route('services') }}" class="nav-item nav-link {{ Route::is('services') ? 'active' : '' }}">Xizmatlarimiz</a>
                             <a href="{{ route('price') }}" class="nav-item nav-link {{ Route::is('price') ? 'active' : '' }}">Tariflarimiz</a>
-                            <a href="{{ route('location') }}" class="nav-item nav-link {{ Route::is('location') ? 'active' : '' }}">Manzillarimiz</a>
                             <a href="{{ route('contact') }}" class="nav-item nav-link {{ Route::is('contact') ? 'active' : '' }}">Biz bilan aloqa</a>
                         </div>
 
@@ -124,54 +123,48 @@
              <div class="footer">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-3 col-md-6">
+                        <!-- Manzillar va aloqa bo'limi -->
+                        <div class="col-lg-4 col-md-6 mb-4">
                             <div class="footer-contact">
-                                <h2>Bizning manzillar</h2>
-                                <p><i class="fa fa-map-marker-alt"></i> {{ $settings->address ?? 'N/A' }}</p>
-                                <p><i class="fa fa-phone-alt"></i> {{ $settings->phone_number ?? 'N/A' }}</p>
-                                <p><i class="fa fa-envelope"></i> {{ $settings->email ?? 'N/A' }}</p>
-                                <div class="footer-social">
-                                    <a class="btn" href="{{$settings->instagram_url ?? ''}}"><i class="fab fa-twitter"></i></a>
-                                    <a class="btn" href="{{$settings->instagram_url ?? ''}}"><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn" href="{{$settings->instagram_url ?? ''}}"><i class="fab fa-youtube"></i></a>
-                                    <a class="btn" href="{{$settings->instagram_url ?? ''}}"><i class="fab fa-instagram"></i></a>
-                                    <a class="btn" href="{{$settings->instagram_url ?? ''}}"><i class="fab fa-linkedin-in"></i></a>
+                                <h2 class="h4 text-uppercase mb-3">Bizning manzillar</h2>
+                                <p><i class="fa fa-map-marker-alt me-2"></i> {{ $settings->address ?? 'N/A' }}</p>
+                                <p><i class="fa fa-phone-alt me-2"></i> {{ $settings->phone_number ?? 'N/A' }}</p>
+                                <p><i class="fa fa-envelope me-2"></i> {{ $settings->email ?? 'N/A' }}</p>
+                                <div class="footer-social mt-3">
+                                    <a class="btn btn-outline-light me-2" href="{{$settings->instagram_url ?? ''}}"><i class="fab fa-twitter"></i></a>
+                                    <a class="btn btn-outline-light me-2" href="{{$settings->facebook_url ?? ''}}"><i class="fab fa-facebook-f"></i></a>
+                                    <a class="btn btn-outline-light me-2" href="{{$settings->youtube_url ?? ''}}"><i class="fab fa-youtube"></i></a>
+                                    <a class="btn btn-outline-light me-2" href="{{$settings->instagram_url ?? ''}}"><i class="fab fa-instagram"></i></a>
+                                    <a class="btn btn-outline-light me-2" href="{{$settings->linkedin_url ?? ''}}"><i class="fab fa-linkedin-in"></i></a>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-6">
+            
+                        <!-- Popular Links bo'limi -->
+                        <div class="col-lg-4 col-md-6 mb-4">
                             <div class="footer-link">
-                                <h2>Popular Links</h2>
-                                <a href="">Biz haqimizda</a>
-                                <a href="">Biz bilan aloqa</a>
-                                <a href="">Xizmatlar</a>
-                                <a href="">Manzillarimiz</a>
-                                <a href="">Tariflarimiz</a>
+                                <h2 class="h4 text-uppercase mb-3">Popular Links</h2>
+                                <ul class="list-unstyled">
+                                    <li><a href="" class="text-light">Biz haqimizda</a></li>
+                                    <li><a href="" class="text-light">Biz bilan aloqa</a></li>
+                                    <li><a href="" class="text-light">Xizmatlar</a></li>
+                                    <li><a href="" class="text-light">Tariflarimiz</a></li>
+                                </ul>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="footer-link">
-                                <h2>Useful Links</h2>
-                                <a href="">Terms of use</a>
-                                <a href="">Privacy policy</a>
-                                <a href="">Cookies</a>
-                                <a href="">Help</a>
-                                <a href="">FQAs</a>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
+            
+                        <!-- Qo'shimcha bo'lim -->
+                        <div class="col-lg-4 col-md-12">
                             <div class="footer-newsletter">
-                                <h2>Newsletter</h2>
+                                <h2 class="h4 text-uppercase mb-3">Yangiliklardan xabardor bo'ling</h2>
                                 <form>
-                                    <input class="form-control" placeholder="Full Name">
-                                    <input class="form-control" placeholder="Email">
-                                    <button class="btn btn-custom">Submit</button>
+                                    <input type="email" class="form-control mb-2" placeholder="Email manzilingiz" required>
+                                    <button type="submit" class="btn btn-light w-100">Obuna bo'lish</button>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
-                
             </div>
             <!-- Footer End -->
             

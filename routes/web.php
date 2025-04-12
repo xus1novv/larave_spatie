@@ -7,6 +7,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SettingController;
@@ -16,6 +17,7 @@ use App\Http\Controllers\TaskForStaffController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\WorkController;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,14 +41,28 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/profile/user', [UserProfileController::class, 'index'])->name('user_profile.index');
-    Route::get('/profile/user/edit', [UserProfileController::class, 'edit'])->name('user_profile.edit');
+    Route::get('/profile/user/edit', [HomeController::class, 'profile_edit '])->name('user_profile.edit');
     Route::patch('/profile/user/update', [UserProfileController::class, 'update'])->name('user_profile.update');
     Route::delete('/profile/user/destroy', [UserProfileController::class, 'destroy'])->name('user_profile.destroy');
 
-    Route::get('/admin/clients/actions', [ClientController::class, 'index'])->name('admin.clients.actions');
-    Route::post('/admin/clients/topup', [ClientController::class, 'topup'])->name('admin.clients.topup');
-    Route::get('/admin/clients/history', [ClientController::class, 'history'])->name('admin.clients.history');
+    Route::get('/clients', [ClientController::class, 'index'])->name('clients.index');
+    Route::get('/clients/{user}', [ClientController::class, 'show'])->name('clients.show');
+    Route::post('/clients/{user}/topup', [ClientController::class, 'topUpBalance'])->name('clients.topup');
+
+    Route::get('/bookings', [BookingController::class, 'orders_list'])->name('bookings.index');
+
+    Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
+    Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+    Route::get('/test-telegram', function () {
+        $response = Http::post("https://api.telegram.org/bot" . env('TELEGRAM_BOT_TOKEN') . "/sendMessage", [
+            'chat_id' => env('TELEGRAM_CHAT_ID'),
+            'text' => '✅ Salom! Bu test xabar!',
+        ]);
+    
+        dd($response->json());
+    });
+        
+
 
 
 
@@ -112,6 +128,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/price',[HomeController::class, 'price'])->name('price');
     Route::get('/service',[HomeController::class, 'services'])->name('services');
     Route::get('/service/{service}', [HomeController::class, 'show'])->name('service.show');
+    Route::get('/profile/user', [HomeController::class, 'user_balance'])->name('user_profile.index');
+
 
 
     Route::get('/services', [BookingController::class, 'index'])->name('services');

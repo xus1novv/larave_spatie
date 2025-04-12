@@ -8,32 +8,35 @@ use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
-    public function index()
-{
-    $clients = User::role('user')->get();
-    return view('balance.list', compact('clients'));
-}
+    public function index(Request $request)
+    {
+        $query = User::role('user')->with('wallet');
 
-public function topup(Request $request)
-{
-    $request->validate([
-        'user_id' => 'required|exists:users,id',
-        'amount' => 'required|numeric|min:100',
-    ]);
+        if ($request->has('search')) {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
 
-    $wallet = Wallet::firstOrCreate(['user_id' => $request->user_id]);
-    $wallet->balance += $request->amount;
-    $wallet->save();
+        $users = $query->paginate(10);
 
-    return back()->with('success', 'Balans muvaffaqiyatli to‘ldirildi!');
-}
+        return view('balance.list', compact('users'));
+    }
 
-public function history(Request $request)
-{
-    $user = User::findOrFail($request->user_id);
-    $bookings = $user->bookings()->latest()->get(); // aloqasi kerak: User → bookings
+    public function show(User $user)
+    {
+        $user->load('wallet', 'bookings'); 
+        return view('balance.history', compact('user'));
+    }
 
-    return view('balance.history', compact('user', 'bookings'));
-}
+    public function topUpBalance(Request $request, User $user)
+    {
+        $request->validate([
+            'amount' => 'required|numeric|min:0.01',
+        ]);
+
+        $wallet = $user->wallet ?? Wallet::create(['user_id' => $user->id, 'balance' => 0]);
+        $wallet->increment('balance', $request->amount);
+
+        return redirect()->route('clients.show', $user->id)->with('success', 'Balance updated successfully.');
+    }
 
 }

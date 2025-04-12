@@ -2,54 +2,65 @@
     <x-slot name="header">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="font-semibold text-2xl text-gray-800 leading-tight">
-                {{ $user->name }} — {{ __('Buyurtma tarixi') }}
+                {{ $user->name }} - Info
             </h2>
-            <a href="{{ route('admin.clients.actions') }}" class="btn btn-secondary">
-                ← Orqaga
-            </a>
-        </div>        
+            <a href="{{ route('clients.index') }}" class="btn btn-secondary px-4 py-2 rounded">← Back</a>
+        </div>
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
 
-            <div class="bg-white p-6 shadow-sm rounded-lg">
-                @if ($bookings->isEmpty())
-                    <p class="text-gray-600">Bu foydalanuvchida buyurtmalar mavjud emas.</p>
-                @else
-                    <div class="table-responsive">
-                        <table class="table table-striped table-bordered">
-                            <thead class="bg-primary text-white">
-                                <tr>
-                                    <th>#</th>
-                                    <th>Xizmat</th>
-                                    <th>Sanasi</th>
-                                    <th>Vaqti</th>
-                                    <th>Holati</th>
-                                    <th>To‘lov</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($bookings as $index => $booking)
-                                    <tr>
-                                        <td>{{ $index + 1 }}</td>
-                                        <td>{{ $booking->service->name ?? '—' }}</td>
-                                        <td>{{ \Carbon\Carbon::parse($booking->date)->format('d.m.Y') }}</td>
-                                        <td>{{ \Carbon\Carbon::parse($booking->time)->format('H:i') }}</td>
-                                        <td>
-                                            <span class="badge bg-{{ $booking->status === 'completed' ? 'success' : ($booking->status === 'cancelled' ? 'danger' : 'warning') }}">
-                                                {{ ucfirst($booking->status) }}
-                                            </span>
-                                        </td>
-                                        <td>{{ number_format($booking->price, 0, ',', ' ') }} so‘m</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                @if (session('success'))
+                    <div class="alert alert-success">{{ session('success') }}</div>
                 @endif
-            </div>
 
+                <h4><strong>Name:</strong> {{ $user->name }}</h4>
+                <h4><strong>Balance:</strong> {{ $user->wallet->balance ?? 0 }} UZS</h4>
+
+                <form method="POST" action="{{ route('clients.topup', $user->id) }}" class="my-4">
+                    @csrf
+                    <div class="input-group mb-2">
+                        <input type="number" name="amount" class="form-control" placeholder="Enter amount to top up" step="0.01" required>
+                        <button type="submit" class="btn btn-success">Top Up</button>
+                    </div>
+                    @error('amount')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </form>
+
+                <hr class="my-4">
+
+                <h5>Booking History</h5>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead class="table-light">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Service</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($user->bookings as $booking)
+                                <tr>
+                                    <td>{{ $booking->id }}</td>
+                                    <td>{{ $booking->service->name ?? '-' }}</td>
+                                    <td>{{ $booking->created_at->format('d M Y H:i') }}</td>
+                                    <td>{{ $booking->status }}</td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="4" class="text-center">No bookings found.</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
         </div>
     </div>
 </x-app-layout>

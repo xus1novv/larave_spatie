@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\Service;
+use App\Models\Wallet;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class BookingController extends Controller
@@ -28,6 +30,7 @@ class BookingController extends Controller
             'booking_time' => 'required|date_format:Y-m-d H:i',
         ]);
 
+        $user = Auth::user();
         $service = Service::findOrFail($request->service_id);
         $bookingTime = new \DateTime($request->booking_time, new \DateTimeZone(config('app.timezone', 'UTC')));
         $duration = $service->duration;
@@ -49,6 +52,14 @@ class BookingController extends Controller
         if ($conflict) {
             return redirect()->back()->withErrors(['booking_time' => 'Bu vaqt oralig\'ida boshqa buyurtma mavjud.']);
         }
+
+        $userBalance = $user->wallet;
+        if($userBalance->balance<$service->price){
+            return back()->with('error', 'Hisobingizda yetarli mablag‘ yo‘q. Iltimos, hisobingizni to‘ldiring.');
+        }
+
+        $userBalance->balance -= $service->price;
+        $userBalance->save();
 
         Booking::create([
             'user_id'=>auth()->id(),
@@ -125,5 +136,20 @@ class BookingController extends Controller
 
     return redirect()->back()->with('success', 'Buyurtma muvaffaqiyatli yuborildi!');
     }
+
+
+    public function orders_list(Request $request)
+{
+    $date = $request->input('date');
+
+    $bookings = Booking::with(['user', 'service'])
+        ->when($date, function ($query) use ($date) {
+            $query->whereDate('booking_time', $date);
+        })
+        ->latest()
+        ->paginate(10);
+
+    return view('orders.list', compact('bookings', 'date'));
+}
 
 }

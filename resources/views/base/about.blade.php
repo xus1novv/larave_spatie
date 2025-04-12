@@ -30,19 +30,18 @@
                     <div class="col-lg-6">
                         <div class="section-header text-left">
                             <p>Biz haqimizda</p>
-                            <h2>car washing and detailing</h2>
+                            <h2>{{$about->title}}</h2>
                         </div>
                         <div class="about-content">
                             <p>
-                                Lorem ipsum dolor sit amet elit. In vitae turpis. Donec in hendre dui, vel blandit massa. Ut vestibu suscipi cursus. Cras quis porta nulla, ut placerat risus. Aliquam nec magna eget velit luctus dictum
+                                {{$about->description}}
                             </p>
                             <ul>
-                                <li><i class="far fa-check-circle"></i>Seats washing</li>
-                                <li><i class="far fa-check-circle"></i>Vacuum cleaning</li>
-                                <li><i class="far fa-check-circle"></i>Interior wet cleaning</li>
-                                <li><i class="far fa-check-circle"></i>Window wiping</li>
+                                <li><i class="far fa-check-circle"></i>Tashqi tozalash</li>
+                                <li><i class="far fa-check-circle"></i>Ichki tozalash</li>
+                                <li><i class="far fa-check-circle"></i>O'rindiqlarni yuvish</li>
+                                <li><i class="far fa-check-circle"></i>G'ildiraklarni tozalash</li>
                             </ul>
-                            <a class="btn btn-custom" href="">Learn More</a>
                         </div>
                     </div>
                 </div>
@@ -59,8 +58,8 @@
                         <div class="facts-item">
                             <i class="fa fa-map-marker-alt"></i>
                             <div class="facts-text">
-                                <h3 data-toggle="counter-up">25</h3>
-                                <p>Service Points</p>
+                                <h3 data-toggle="counter-up">{{$about->service_points}}</h3>
+                                <p>Manzillarimiz soni</p>
                             </div>
                         </div>
                     </div>
@@ -68,8 +67,8 @@
                         <div class="facts-item">
                             <i class="fa fa-user"></i>
                             <div class="facts-text">
-                                <h3 data-toggle="counter-up">350</h3>
-                                <p>Engineers & Workers</p>
+                                <h3 data-toggle="counter-up">{{$about->engineers_workers}}</h3>
+                                <p>Muhandis va ishchilar</p>
                             </div>
                         </div>
                     </div>
@@ -77,8 +76,8 @@
                         <div class="facts-item">
                             <i class="fa fa-users"></i>
                             <div class="facts-text">
-                                <h3 data-toggle="counter-up">1500</h3>
-                                <p>Happy Clients</p>
+                                <h3 data-toggle="counter-up">{{$about->happy_clients}}</h3>
+                                <p>Hursand mijozlarimiz</p>
                             </div>
                         </div>
                     </div>
@@ -86,8 +85,8 @@
                         <div class="facts-item">
                             <i class="fa fa-check"></i>
                             <div class="facts-text">
-                                <h3 data-toggle="counter-up">5000</h3>
-                                <p>Projects Completed</p>
+                                <h3 data-toggle="counter-up">{{$about->projects_completed}}</h3>
+                                <p>Bajarilgan loyihalar</p>
                             </div>
                         </div>
                     </div>
@@ -101,8 +100,8 @@
         <div class="team">
             <div class="container">
                 <div class="section-header text-center">
-                    <p>Meet Our Team</p>
-                    <h2>Our Engineers & Workers</h2>
+                    <p>Bizning jamoa</p>
+                    <h2>Bizning muhandis va ishchilarimiz</h2>
                 </div>
                 <div class="row">
                     <div class="col-lg-3 col-md-6">
@@ -111,8 +110,8 @@
                                 <img src="img/team-1.png" alt="Team Image">
                             </div>
                             <div class="team-text">
-                                <h2>Donald John</h2>
-                                <p>Engineer</p>
+                                <h2>Elomon Jumanazarov</h2>
+                                <p>Muhandis</p>
                                 <div class="team-social">
                                     <a href=""><i class="fab fa-twitter"></i></a>
                                     <a href=""><i class="fab fa-facebook-f"></i></a>
@@ -128,8 +127,8 @@
                                 <img src="img/team-1.png" alt="Team Image">
                             </div>
                             <div class="team-text">
-                                <h2>Adam Phillips</h2>
-                                <p>Engineer</p>
+                                <h2>Odiljonov Maqsadbek</h2>
+                                <p>Muhandis</p>
                                 <div class="team-social">
                                     <a href=""><i class="fab fa-twitter"></i></a>
                                     <a href=""><i class="fab fa-facebook-f"></i></a>
@@ -145,8 +144,8 @@
                                 <img src="img/team-1.png" alt="Team Image">
                             </div>
                             <div class="team-text">
-                                <h2>Thomas Olsen</h2>
-                                <p>Worker</p>
+                                <h2>Xusinov Og'abek</h2>
+                                <p>Ishchi</p>
                                 <div class="team-social">
                                     <a href=""><i class="fab fa-twitter"></i></a>
                                     <a href=""><i class="fab fa-facebook-f"></i></a>
@@ -162,8 +161,8 @@
                                 <img src="img/team-1.png" alt="Team Image">
                             </div>
                             <div class="team-text">
-                                <h2>James Alien</h2>
-                                <p>Worker</p>
+                                <h2>Allanazarov Mirzohid</h2>
+                                <p>Ishchi</p>
                                 <div class="team-social">
                                     <a href=""><i class="fab fa-twitter"></i></a>
                                     <a href=""><i class="fab fa-facebook-f"></i></a>
