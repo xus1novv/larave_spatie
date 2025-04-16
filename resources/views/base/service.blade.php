@@ -10,6 +10,30 @@
             <h2 class="display-5 fw-bold text-dark">Premium tozalash servislari</h2>
         </div>
 
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        <!-- Xato xabari (yangi qo'shilgan qism) -->
+        @if(session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+
+        <!-- Validatsiya xatolari -->
+        @if($errors->any())
+            <div class="alert alert-danger">
+                <ul class="mb-0">
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
             @if ($services && $services->isNotEmpty())
                 @foreach ($services as $service)

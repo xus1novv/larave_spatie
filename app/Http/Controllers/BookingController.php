@@ -65,7 +65,7 @@ class BookingController extends Controller
             $userBalance = $user->wallet;
         
             if ($userBalance->balance < $service->price) {
-                return back()->with('error', 'Hisobingizda yetarli mablag‘ yo‘q. Iltimos, hisobingizni to‘ldiring.');
+                return redirect()->back()->with('error', 'Hisobingizda yetarli mablag‘ yo‘q. Iltimos, hisobingizni to‘ldiring.');
             }
         
             $userBalance->balance -= $service->price;
@@ -77,7 +77,7 @@ class BookingController extends Controller
                 $userBalance = $user->wallet;
         
                 if ($userBalance->balance < $service->price) {
-                    return back()->with('error', 'Hisobingizda yetarli mablag‘ yo‘q. Iltimos, hisobingizni to‘ldiring.');
+                    return redirect()->back()->with('error', 'Hisobingizda yetarli mablag‘ yo‘q. Iltimos, hisobingizni to‘ldiring.');
                 }
         
                 $userBalance->balance -= $service->price;
