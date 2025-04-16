@@ -11,9 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Schema::table('bookings', function (Blueprint $table) {
-        //     $table->foreignId('user_id')->after('id')->constrained()->onDelete('cascade');
-        // });
+        Schema::create('sub_plans', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->integer('duration_months');
+            $table->decimal('price', 8, 2);
+            $table->timestamps();
+        });
     }
 
     /**
@@ -21,9 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('bookings', function (Blueprint $table) {
-            $table->dropForeign(['user_id']);
-            $table->dropColumn('user_id');
-        });
+        Schema::dropIfExists('sub_plans');
     }
 };

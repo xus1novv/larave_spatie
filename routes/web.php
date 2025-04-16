@@ -12,6 +12,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\StatisticsController;
+use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TaskForStaffController;
 use App\Http\Controllers\UserController;
@@ -41,7 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/profile/user/edit', [HomeController::class, 'profile_edit '])->name('user_profile.edit');
+    Route::get('/profile/user/edit', [HomeController::class, 'profile_edit'])->name('user_profile.edit');
     Route::patch('/profile/user/update', [UserProfileController::class, 'update'])->name('user_profile.update');
     Route::delete('/profile/user/destroy', [UserProfileController::class, 'destroy'])->name('user_profile.destroy');
 
@@ -61,9 +62,14 @@ Route::middleware('auth')->group(function () {
     
         dd($response->json());
     });
-        
 
+    Route::get('/subscribe', [SubscriptionController::class, 'showPlans'])->name('subscribe.plans');
+    Route::post('/subscribe', [SubscriptionController::class, 'subscribe'])->name('subscribe.user');
 
+    Route::get('admin/subscription-plans', [SubscriptionController::class, 'sub_list'])->name('admin.sub.index');
+    Route::get('admin/subscription-plans/create', [SubscriptionController::class, 'create'])->name('admin.sub.create');
+    Route::post('admin/subscription-plans', [SubscriptionController::class, 'store'])->name('admin.sub.store');
+    Route::delete('admin/subscription-plans/{plan}', [SubscriptionController::class, 'destroy'])->name('admin.sub.destroy');
 
 
     // Permission route

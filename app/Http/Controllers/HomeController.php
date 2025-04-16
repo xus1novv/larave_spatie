@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\About;
 use App\Models\Booking;
 use App\Models\Service;
+use App\Models\SubPlans;
 use App\Models\Team;
 use App\Models\Wallet;
 use App\Models\Work;
@@ -24,9 +25,11 @@ class HomeController extends BaseController
     {
         $services = Service::where('is_active', 1)->get();
         $about = About::first();
+        $plans = SubPlans::all();
         return view('base.home_page',[
             'services' => $services,
             'about' => $about,
+            'plans' => $plans
         ]);
     }
 
@@ -51,7 +54,10 @@ class HomeController extends BaseController
     }
 
     public function price() {
-        return view('base.price');
+        $plans = SubPlans::all();
+        return view('base.price', [
+            'plans' => $plans
+        ]);
     }
 
     public function location() {

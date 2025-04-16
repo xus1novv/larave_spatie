@@ -63,18 +63,6 @@
         </div>
     </div>
 
-    <!-- Profilni o'chirish formasi -->
-    <div class="mt-4">
-        <form method="post" action="{{ route('user_profile.destroy') }}">
-            @csrf
-            @method('DELETE')
-
-            <button type="submit" class="btn btn-danger">Profilni o'chirish</button>
-        </form>
-    </div>
-</div>
-
-<div class="container mt-5">
     <div class="card shadow-sm">
         <div class="card-header bg-warning text-white">
             <h4 class="mb-0">Parolni yangilash</h4>
@@ -123,6 +111,15 @@
             </form>
         </div>
     </div>
+
+    <div class="mt-4">
+        <form method="post" action="{{ route('user_profile.destroy') }}">
+            @csrf
+            @method('DELETE')
+
+            <button type="submit" class="btn btn-danger">Profilni o'chirish</button>
+        </form>
+    </div>    
 </div>
 
 <!-- Verification form (hidden) -->

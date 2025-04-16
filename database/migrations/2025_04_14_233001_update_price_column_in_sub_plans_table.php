@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Schema::table('bookings', function (Blueprint $table) {
-        //     $table->foreignId('user_id')->after('id')->constrained()->onDelete('cascade');
-        // });
+        Schema::table('sub_plans', function (Blueprint $table) {
+            $table->decimal('price', 12, 2)->change();
+        });
     }
 
     /**
@@ -21,9 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('bookings', function (Blueprint $table) {
-            $table->dropForeign(['user_id']);
-            $table->dropColumn('user_id');
+        Schema::table('sub_plans', function (Blueprint $table) {
+            $table->decimal('price', 8, 2)->change();
         });
     }
 };

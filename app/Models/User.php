@@ -12,8 +12,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasRoles;
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasRoles, HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -46,13 +45,23 @@ class User extends Authenticatable
     ];
 
     public function wallet()
-{
-    return $this->hasOne(Wallet::class);
-}
+    {
+        return $this->hasOne(Wallet::class);
+    }
 
-public function bookings()
-{
-    return $this->hasMany(Booking::class);
-}
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
+
+    public function subscription()
+    {
+        return $this->hasOne(Subscription::class);
+    }
+
+    public function hasActiveSubscription()
+    {
+        return $this->subscription && $this->subscription->end_date >= now();
+    }
 
 }

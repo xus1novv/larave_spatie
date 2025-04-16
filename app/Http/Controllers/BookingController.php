@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\Service;
+use App\Models\Subscription;
 use App\Models\Wallet;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -34,6 +35,7 @@ class BookingController extends Controller
         $service = Service::findOrFail($request->service_id);
         $bookingTime = new \DateTime($request->booking_time, new \DateTimeZone(config('app.timezone', 'UTC')));
         $duration = $service->duration;
+    
 
         $endTime = clone $bookingTime;
         $endTime->modify("+{$duration} minutes");
@@ -49,17 +51,39 @@ class BookingController extends Controller
             })
             ->exists();
 
+        $subscription = \App\Models\Subscription::where('user_id', Auth::id())
+        ->where('end_date', '>', now())
+        ->first();
+    
+
         if ($conflict) {
             return redirect()->back()->withErrors(['booking_time' => 'Bu vaqt oralig\'ida boshqa buyurtma mavjud.']);
         }
-
         $userBalance = $user->wallet;
-        if($userBalance->balance<$service->price){
-            return back()->with('error', 'Hisobingizda yetarli mablag‘ yo‘q. Iltimos, hisobingizni to‘ldiring.');
-        }
 
-        $userBalance->balance -= $service->price;
-        $userBalance->save();
+        if (!$subscription) {
+            $userBalance = $user->wallet;
+        
+            if ($userBalance->balance < $service->price) {
+                return back()->with('error', 'Hisobingizda yetarli mablag‘ yo‘q. Iltimos, hisobingizni to‘ldiring.');
+            }
+        
+            $userBalance->balance -= $service->price;
+            $userBalance->save();
+        } else {
+            if ($subscription->car_model == $request->car_model && $subscription->car_number == $request->car_number) {
+                $servicePrice = 0; 
+            } else {
+                $userBalance = $user->wallet;
+        
+                if ($userBalance->balance < $service->price) {
+                    return back()->with('error', 'Hisobingizda yetarli mablag‘ yo‘q. Iltimos, hisobingizni to‘ldiring.');
+                }
+        
+                $userBalance->balance -= $service->price;
+                $userBalance->save();
+            }
+        }
 
         Booking::create([
             'user_id'=>auth()->id(),
@@ -151,5 +175,4 @@ class BookingController extends Controller
 
     return view('orders.list', compact('bookings', 'date'));
 }
-
 }
